@@ -1,0 +1,120 @@
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+    tech.abite: debug
+  file:
+    path: ./logs
+    name: ice_
+
+server:
+  port: 8090
+
+platform:
+  parameter:
+    queueName: log_direct_queue
+    exhcangeName: log_direct_exchange
+    bindingKey: log_websocket
+
+spring:
+  cache:
+    type: REDIS
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000
+    database: 0
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 100
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+  banner:
+    location: classpath:banner.txt
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    username: guest
+    password: guest
+    virtual-host: /abc
+    listener:
+      simple:
+        prefetch: 1
+        acknowledge-mode: manual
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ice?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: qwe123
+    hikari:
+      minimum-idle: 5 # 最小空闲时间
+      idle-timeout: 600000 # 空闲连接存活最大时间，默认是 60 00 00 ，也就是 10 分钟
+      maximum-pool-size: 10 #连接池最大连接数 默认是 10
+      auto-commit: true # 自动提交
+      max-lifetime: 1800000 # 连接池连接的最大生命周期
+      connection-timeout: 30000 # 连接查实的时间 默认 30 秒
+  task:
+    execution:
+      pool:
+        # 最大线程数
+        max-size: 16
+        # 核心线程数
+        core-size: 16
+        # 存活时间
+        keep-alive: 10s
+        # 队列大小
+        queue-capacity: 100
+        # 是否允许核心线程超时
+        allow-core-thread-timeout: true
+      # 线程名称前缀
+      thread-name-prefix: async-task-
+
+mybatis:
+  configuration:
+    cache-enabled: true
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: true
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    auto-mapping-behavior: full
+    default-statement-timeout: 25000
+    map-underscore-to-camel-case: true
+
+
+swagger:
+  title: spring-boot-start
+  description: api doc for  springboot
+  version: 1.4.0
+  license: Apache License, Version 2.0
+  base-package: com.example
+  base-path:
+    - /**
+
+flyway:
+  # 启用或禁用 flyway
+  enabled: true
+  # flyway 的 clean 命令会删除指定 schema 下的所有 table, 生产务必禁掉。这个默认值是 false 理论上作为默认配置是不科学的。
+  clean-disabled: true
+  # SQL 脚本的目录,多个路径使用逗号分隔 默认值 classpath:db/migration
+  locations: classpath:db/migration
+  #  metadata 版本控制信息表 默认 flyway_schema_history
+  table: ice_version
+  # 如果没有 flyway_schema_history 这个 metadata 表， 在执行 flyway migrate 命令之前, 必须先执行 flyway baseline 命令
+  # 设置为 true 后 flyway 将在需要 baseline 的时候, 自动执行一次 baseline。
+  baseline-on-migrate: true
+  # 指定 baseline 的版本号,默认值为 1, 低于该版本号的 SQL 文件, migrate 时会被忽略
+  baseline-version: 1
+  # 字符编码 默认 UTF-8
+  encoding: UTF-8
+  # 是否允许不按顺序迁移 开发建议 true  生产建议 false
+  out-of-order: true
+  # 需要 flyway 管控的 schema list,这里我们配置为flyway  缺省的话, 使用spring.datasource.url 配置的那个 schema,
+  # 可以指定多个schema, 但仅会在第一个schema下建立 metadata 表, 也仅在第一个schema应用migration sql 脚本.
+  # 但flyway Clean 命令会依次在这些schema下都执行一遍. 所以 确保生产 spring.flyway.clean-disabled 为 true
+  # 表名
+  schemas: ice
+  # 执行迁移时是否自动调用验证   当你的版本不符合逻辑 比如 你先执行了 DML 而没有 对应的DDL 会抛出异常
+  validate-on-migrate: true
