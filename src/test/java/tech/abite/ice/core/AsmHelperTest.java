@@ -21,7 +21,7 @@ import java.util.List;
 public class AsmHelperTest {
     @Test
     public void testAsmAnalyse(){
-        String path = "/Users/jackson/projects/stock-admin/stock-admin/target";
+        String path = "D:\\codes\\stock-admin\\stock-admin\\target";
         List<File> fileList = FileUtils.loopClassFiles(path);
         for(File file : fileList) {
             Boolean isController = false;
@@ -58,11 +58,6 @@ public class AsmHelperTest {
             log.info("className: " + asmHelper.name.replaceAll(".*/",""));
 
             // boolean isController = asmHelper.name.replaceAll(".*/","").contains("Controller");
-            if(!isController) {
-                continue;
-            }
-
-
 
             try{
 //                nodeList.forEach(item -> {
@@ -72,12 +67,9 @@ public class AsmHelperTest {
 //                    });
 //                });
 
-                for(AnnotationNode n : nodeList) {
-                    log.info("request mapping: " + n.values.get(1).toString());
-                }
+
 
                 methodNodeList.forEach(item -> {
-
                     if(!item.name.contains("init")){
                         log.info("method name: " + item.name);
                         List<AnnotationNode> annotationNodes = item.visibleAnnotations;
@@ -91,7 +83,7 @@ public class AsmHelperTest {
 
                 });
             }catch (Exception e) {
-
+                log.error(e.getMessage());
             }
 
         }

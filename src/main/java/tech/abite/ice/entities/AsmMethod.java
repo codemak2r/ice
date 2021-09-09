@@ -1,17 +1,20 @@
 package tech.abite.ice.entities;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author john
@@ -57,11 +60,11 @@ public class AsmMethod implements Serializable {
     private Integer isStatic;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(value = "created_time", fill = FieldFill.INSERT)
+    @TableField(value = "created_time")
     private LocalDateTime createdTime;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField("updated_time")
+    @TableField(value = "updated_time")
     private LocalDateTime updatedTime;
 
 

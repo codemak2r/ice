@@ -1,16 +1,16 @@
 package tech.abite.ice.mappers;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import tech.abite.ice.entities.AsmMethodAnno;
+import tech.abite.ice.mappers.ex.BaseMapperEx;
 
 /**
  * <p>
- * Mapper 接口
+ *  Mapper 接口
  * </p>
  *
  * @author john
  * @since 2021-09-09
  */
-public interface AsmMethodAnnoMapper extends BaseMapper<AsmMethodAnno> {
+public interface AsmMethodAnnoMapper extends BaseMapperEx<AsmMethodAnno> {
 
 }

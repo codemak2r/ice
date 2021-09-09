@@ -1,6 +1,6 @@
 package tech.abite.ice.mappers;
 
-import tech.abite.ice.entities.AsmObjAnnotation;
+import tech.abite.ice.entities.AsmObjMapping;
 import tech.abite.ice.mappers.ex.BaseMapperEx;
 
 /**
@@ -11,6 +11,6 @@ import tech.abite.ice.mappers.ex.BaseMapperEx;
  * @author john
  * @since 2021-09-09
  */
-public interface AsmObjAnnotationMapper extends BaseMapperEx<AsmObjAnnotation> {
+public interface AsmObjMappingMapper extends BaseMapperEx<AsmObjMapping> {
 
 }

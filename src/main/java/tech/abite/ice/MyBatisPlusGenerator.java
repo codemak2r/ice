@@ -80,6 +80,7 @@ public class MyBatisPlusGenerator {
                 .naming(NamingStrategy.underline_to_camel)// 数据库表映射到实体的命名策略
                 .addTableFills(new Column("created_time", FieldFill.INSERT))	//基于数据库字段填充
                 .addTableFills(new Property("updated_time", FieldFill.INSERT_UPDATE))	//基于模型属性填充
+
                 .controllerBuilder() //控制器属性配置构建
                 .enableRestStyle()
                 .build();
