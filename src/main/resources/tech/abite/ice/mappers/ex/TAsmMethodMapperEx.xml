@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.abite.ice.mappers.ex.TAsmMethodMapperEx">
+
+  <insert id="insertBatch" parameterType="tech.abite.ice.model.TAsmMethod">
+    <selectKey keyProperty="asmMethodId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_method (asm_method_id, project_id, asm_method_name, 
+      asm_obj_id, is_static, created_time, 
+      updated_time)
+    values
+    <foreach collection="List" item="item" index="index" separator=",">
+    (#{item.asmMethodId,jdbcType=BIGINT}, #{item.projectId,jdbcType=BIGINT}, #{item.asmMethodName,jdbcType=VARCHAR},
+      #{item.asmObjId,jdbcType=BIGINT}, #{item.isStatic,jdbcType=INTEGER}, #{item.createdTime,jdbcType=TIMESTAMP},
+      #{item.updatedTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+</mapper>

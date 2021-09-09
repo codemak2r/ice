@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.abite.ice.mappers.ex.TAsmFieldMapperEx">
+
+  <insert id="insertBatch" parameterType="java.util.List"
+    useGeneratedKeys="true">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_field (asm_field_id, project_id, asm_obj_id, 
+      asm_obj_name, asm_field_name, is_static, 
+      created_time, updated_time)
+    values
+    <foreach collection="List" item="field" index="index" separator=",">
+      (#{field.asmFieldId,jdbcType=BIGINT},
+      #{field.projectId,jdbcType=BIGINT},
+      #{field.asmObjId,jdbcType=BIGINT},
+      #{field.asmObjName,jdbcType=VARCHAR},
+      #{field.asmFieldName,jdbcType=VARCHAR},
+      #{field.isStatic,jdbcType=INTEGER},
+        now(),
+      #{updatedTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+</mapper>

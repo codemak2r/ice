@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.abite.ice.mappers.TAsmObjMapper">
+  <resultMap id="BaseResultMap" type="tech.abite.ice.model.TAsmObj">
+    <id column="asm_obj_id" jdbcType="BIGINT" property="asmObjId" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="is_cotroller" jdbcType="INTEGER" property="isCotroller" />
+    <result column="asm_obj_name" jdbcType="VARCHAR" property="asmObjName" />
+    <result column="asm_obj_fullname" jdbcType="VARCHAR" property="asmObjFullname" />
+    <result column="asm_obj_file_path" jdbcType="VARCHAR" property="asmObjFilePath" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    asm_obj_id, project_id, is_cotroller, asm_obj_name, asm_obj_fullname, asm_obj_file_path, 
+    created_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_asm_obj
+    where asm_obj_id = #{asmObjId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_asm_obj
+    where asm_obj_id = #{asmObjId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="tech.abite.ice.model.TAsmObj">
+    <selectKey keyProperty="asmObjId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_obj (project_id, is_cotroller, asm_obj_name, 
+      asm_obj_fullname, asm_obj_file_path, created_time, 
+      updated_time)
+    values (#{projectId,jdbcType=BIGINT}, #{isCotroller,jdbcType=INTEGER}, #{asmObjName,jdbcType=VARCHAR}, 
+      #{asmObjFullname,jdbcType=VARCHAR}, #{asmObjFilePath,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="tech.abite.ice.model.TAsmObj">
+    <selectKey keyProperty="asmObjId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_obj
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="isCotroller != null">
+        is_cotroller,
+      </if>
+      <if test="asmObjName != null">
+        asm_obj_name,
+      </if>
+      <if test="asmObjFullname != null">
+        asm_obj_fullname,
+      </if>
+      <if test="asmObjFilePath != null">
+        asm_obj_file_path,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="isCotroller != null">
+        #{isCotroller,jdbcType=INTEGER},
+      </if>
+      <if test="asmObjName != null">
+        #{asmObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="asmObjFullname != null">
+        #{asmObjFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="asmObjFilePath != null">
+        #{asmObjFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tech.abite.ice.model.TAsmObj">
+    update t_asm_obj
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="isCotroller != null">
+        is_cotroller = #{isCotroller,jdbcType=INTEGER},
+      </if>
+      <if test="asmObjName != null">
+        asm_obj_name = #{asmObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="asmObjFullname != null">
+        asm_obj_fullname = #{asmObjFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="asmObjFilePath != null">
+        asm_obj_file_path = #{asmObjFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where asm_obj_id = #{asmObjId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tech.abite.ice.model.TAsmObj">
+    update t_asm_obj
+    set project_id = #{projectId,jdbcType=BIGINT},
+      is_cotroller = #{isCotroller,jdbcType=INTEGER},
+      asm_obj_name = #{asmObjName,jdbcType=VARCHAR},
+      asm_obj_fullname = #{asmObjFullname,jdbcType=VARCHAR},
+      asm_obj_file_path = #{asmObjFilePath,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where asm_obj_id = #{asmObjId,jdbcType=BIGINT}
+  </update>
+</mapper>

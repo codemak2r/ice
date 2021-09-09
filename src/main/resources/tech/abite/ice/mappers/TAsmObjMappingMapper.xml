@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.abite.ice.mappers.TAsmObjMappingMapper">
+  <resultMap id="BaseResultMap" type="tech.abite.ice.model.TAsmObjMapping">
+    <id column="t_asm_obj_mapping_id" jdbcType="BIGINT" property="tAsmObjMappingId" />
+    <result column="t_controller_obj_id" jdbcType="BIGINT" property="tControllerObjId" />
+    <result column="t_other_obj_id" jdbcType="BIGINT" property="tOtherObjId" />
+    <result column="t_other_obj_method_id" jdbcType="BIGINT" property="tOtherObjMethodId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t_asm_obj_mapping_id, t_controller_obj_id, t_other_obj_id, t_other_obj_method_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_asm_obj_mapping
+    where t_asm_obj_mapping_id = #{tAsmObjMappingId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_asm_obj_mapping
+    where t_asm_obj_mapping_id = #{tAsmObjMappingId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="tech.abite.ice.model.TAsmObjMapping">
+    insert into t_asm_obj_mapping (t_asm_obj_mapping_id, t_controller_obj_id, 
+      t_other_obj_id, t_other_obj_method_id)
+    values (#{tAsmObjMappingId,jdbcType=BIGINT}, #{tControllerObjId,jdbcType=BIGINT}, 
+      #{tOtherObjId,jdbcType=BIGINT}, #{tOtherObjMethodId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="tech.abite.ice.model.TAsmObjMapping">
+    insert into t_asm_obj_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tAsmObjMappingId != null">
+        t_asm_obj_mapping_id,
+      </if>
+      <if test="tControllerObjId != null">
+        t_controller_obj_id,
+      </if>
+      <if test="tOtherObjId != null">
+        t_other_obj_id,
+      </if>
+      <if test="tOtherObjMethodId != null">
+        t_other_obj_method_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tAsmObjMappingId != null">
+        #{tAsmObjMappingId,jdbcType=BIGINT},
+      </if>
+      <if test="tControllerObjId != null">
+        #{tControllerObjId,jdbcType=BIGINT},
+      </if>
+      <if test="tOtherObjId != null">
+        #{tOtherObjId,jdbcType=BIGINT},
+      </if>
+      <if test="tOtherObjMethodId != null">
+        #{tOtherObjMethodId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tech.abite.ice.model.TAsmObjMapping">
+    update t_asm_obj_mapping
+    <set>
+      <if test="tControllerObjId != null">
+        t_controller_obj_id = #{tControllerObjId,jdbcType=BIGINT},
+      </if>
+      <if test="tOtherObjId != null">
+        t_other_obj_id = #{tOtherObjId,jdbcType=BIGINT},
+      </if>
+      <if test="tOtherObjMethodId != null">
+        t_other_obj_method_id = #{tOtherObjMethodId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where t_asm_obj_mapping_id = #{tAsmObjMappingId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tech.abite.ice.model.TAsmObjMapping">
+    update t_asm_obj_mapping
+    set t_controller_obj_id = #{tControllerObjId,jdbcType=BIGINT},
+      t_other_obj_id = #{tOtherObjId,jdbcType=BIGINT},
+      t_other_obj_method_id = #{tOtherObjMethodId,jdbcType=BIGINT}
+    where t_asm_obj_mapping_id = #{tAsmObjMappingId,jdbcType=BIGINT}
+  </update>
+</mapper>

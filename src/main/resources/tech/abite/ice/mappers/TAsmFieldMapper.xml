@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.abite.ice.mappers.TAsmFieldMapper">
+  <resultMap id="BaseResultMap" type="tech.abite.ice.model.TAsmField">
+    <id column="asm_field_id" jdbcType="BIGINT" property="asmFieldId" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="asm_obj_id" jdbcType="BIGINT" property="asmObjId" />
+    <result column="asm_obj_name" jdbcType="VARCHAR" property="asmObjName" />
+    <result column="asm_field_name" jdbcType="VARCHAR" property="asmFieldName" />
+    <result column="is_static" jdbcType="INTEGER" property="isStatic" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    asm_field_id, project_id, asm_obj_id, asm_obj_name, asm_field_name, is_static, created_time, 
+    updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_asm_field
+    where asm_field_id = #{asmFieldId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_asm_field
+    where asm_field_id = #{asmFieldId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="tech.abite.ice.model.TAsmField">
+    <selectKey keyProperty="asmFieldId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_field (project_id, asm_obj_id, asm_obj_name, 
+      asm_field_name, is_static, created_time, 
+      updated_time)
+    values (#{projectId,jdbcType=BIGINT}, #{asmObjId,jdbcType=BIGINT}, #{asmObjName,jdbcType=VARCHAR}, 
+      #{asmFieldName,jdbcType=VARCHAR}, #{isStatic,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="tech.abite.ice.model.TAsmField">
+    <selectKey keyProperty="asmFieldId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_asm_field
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="asmObjId != null">
+        asm_obj_id,
+      </if>
+      <if test="asmObjName != null">
+        asm_obj_name,
+      </if>
+      <if test="asmFieldName != null">
+        asm_field_name,
+      </if>
+      <if test="isStatic != null">
+        is_static,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="asmObjId != null">
+        #{asmObjId,jdbcType=BIGINT},
+      </if>
+      <if test="asmObjName != null">
+        #{asmObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="asmFieldName != null">
+        #{asmFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isStatic != null">
+        #{isStatic,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tech.abite.ice.model.TAsmField">
+    update t_asm_field
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="asmObjId != null">
+        asm_obj_id = #{asmObjId,jdbcType=BIGINT},
+      </if>
+      <if test="asmObjName != null">
+        asm_obj_name = #{asmObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="asmFieldName != null">
+        asm_field_name = #{asmFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isStatic != null">
+        is_static = #{isStatic,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where asm_field_id = #{asmFieldId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tech.abite.ice.model.TAsmField">
+    update t_asm_field
+    set project_id = #{projectId,jdbcType=BIGINT},
+      asm_obj_id = #{asmObjId,jdbcType=BIGINT},
+      asm_obj_name = #{asmObjName,jdbcType=VARCHAR},
+      asm_field_name = #{asmFieldName,jdbcType=VARCHAR},
+      is_static = #{isStatic,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where asm_field_id = #{asmFieldId,jdbcType=BIGINT}
+  </update>
+</mapper>
