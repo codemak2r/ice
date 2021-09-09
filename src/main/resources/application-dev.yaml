@@ -83,13 +83,17 @@ mybatis:
     default-statement-timeout: 25000
     map-underscore-to-camel-case: true
 
+mybatis-plus:
+  mapperLocations: classpath:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 swagger:
   title: spring-boot-start
-  description: api doc for  springboot
+  description: api doc for springboot
   version: 1.4.0
   license: Apache License, Version 2.0
-  base-package: com.example
+  base-package: tech.abite.ice
   base-path:
     - /**
 

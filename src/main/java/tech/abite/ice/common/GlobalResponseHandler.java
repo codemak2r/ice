@@ -1,4 +1,4 @@
-package tech.abite.ice.common.enums;
+package tech.abite.ice.common;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -7,7 +7,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import tech.abite.ice.annotation.IgnoreAdvice;
-import tech.abite.ice.common.GlobalResult;
 
 @RestControllerAdvice
 public class GlobalResponseHandler implements ResponseBodyAdvice {

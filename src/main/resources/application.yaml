@@ -1,1 +1,4 @@
-
+spring:
+  profiles:
+    # 默认启动环境
+    active: dev

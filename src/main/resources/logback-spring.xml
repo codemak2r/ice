@@ -5,19 +5,19 @@
         <!-- reset all previous level configurations of all j.u.l. loggers -->
         <resetJUL>true</resetJUL>
     </contextListener>
-    <springProperty scope="context" name="logging.path" source="logging.path"/>
-    <springProperty scope="context" name="logging.name" source="logging.file"/>
+    <springProperty scope="context" name="logging.path" source="logging.file.path"/>
+    <springProperty scope="context" name="logging.name" source="logging.file.name"/>
     <springProperty scope="context" name="logging.level" source="logging.level.root"/>
-    <springProperty scope="context" name="rabbitmq-address" source="spring.rabbitmq.addresses"
-                    defaultValue="127.0.0.1:5672"/>
-    <springProperty scope="context" name="rabbitmq-username" source="spring.rabbitmq.username" defaultValue="guest"/>
-    <springProperty scope="context" name="rabbitmq-password" source="spring.rabbitmq.password" defaultValue="guest"/>
-    <springProperty scope="context" name="rabbitmq-virtual-host" source="spring.rabbitmq.virtual-host"
-                    defaultValue="abc"/>
-    <springProperty scope="context" name="exhcange-name" source="platform.parameter.exhcangeName"
-                    defaultValue="default-exchange"/>
-    <springProperty scope="context" name="binding-key" source="platform.parameter.bindingKey"
-                    defaultValue="default-routing"/>
+<!--    <springProperty scope="context" name="rabbitmq-address" source="spring.rabbitmq.addresses"-->
+<!--                    defaultValue="127.0.0.1:5672"/>-->
+<!--    <springProperty scope="context" name="rabbitmq-username" source="spring.rabbitmq.username" defaultValue="guest"/>-->
+<!--    <springProperty scope="context" name="rabbitmq-password" source="spring.rabbitmq.password" defaultValue="guest"/>-->
+<!--    <springProperty scope="context" name="rabbitmq-virtual-host" source="spring.rabbitmq.virtual-host"-->
+<!--                    defaultValue="abc"/>-->
+<!--    <springProperty scope="context" name="exhcange-name" source="platform.parameter.exhcangeName"-->
+<!--                    defaultValue="default-exchange"/>-->
+<!--    <springProperty scope="context" name="binding-key" source="platform.parameter.bindingKey"-->
+<!--                    defaultValue="default-routing"/>-->
 
 <!--    <appender name="RabbitMq" class="org.springframework.amqp.rabbit.logback.AmqpAppender">-->
 <!--        <layout>-->
@@ -81,7 +81,7 @@
     <!-- root日志输出级别, 必须定义 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="RabbitMq"/>
+<!--        <appender-ref ref="RabbitMq"/>-->
     </root>
 
 </configuration>
